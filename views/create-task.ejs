@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+    </style>
+
+    <body>
+        <%- include('partials/nav.ejs') %>
+
+            <form class="create-task" action="/create-task" method="post">
+                <label for="Goal">Goal</label>
+                <input type="text" id="Goal" required name="Goal" placeholder="Goal">
+                <label for="Requirements">Requirements</label>
+                <input type="text" id="Requirements" required name="Requirements" placeholder="Requirements">
+                <label for="Deadline">Deadline</label>
+                <input type="date" id="Deadline" required name="Deadline" placeholder="Deadline">
+
+                <button type="submit">Enter</button>
+            </form>
+    </body>
+
+</html>

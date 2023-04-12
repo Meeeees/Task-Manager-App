@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+
+    <body>
+        <%- include('partials/nav.ejs') %>
+            <div class="HeaderSearch">
+                <h1>View Tasks</h1>
+                <% if (tasks.length===0) { %>
+            </div>
+            <p>No tasks to show</p>
+
+            <% } %>
+                <% if (tasks.length> 0) { %>
+                    <input type="text" id="search" onkeyup="search()" placeholder="Search for tasks..">
+                    </div>
+                    <ul class="view-tasks">
+                        <% for (let task of tasks) { %>
+                            <li>
+                                <h3>
+                                    <%= task.Goal %>
+                                </h3>
+                                <p class="reqs">
+                                    <%= task.Requirements %>
+                                </p>
+                                <p data-date="<%= task.Deadline %>">
+                                    <strong></strong>
+                                </p>
+                                <button class="removebutton" data-id="<%= task._id %>" onclick="Delete()"><i
+                                        class="fa-solid fa-trash"></i>
+                                </button>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <% } %>
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body>
+
+        <%- include('partials/nav.ejs') %>
+
+            <h1>Edit Tasks</h1>
+
+            <% if (tasks===0) { %>
+                <p>No tasks to show</p>
+                <% } %>
+
+                    <% if (tasks.length> 0) { %>
+                        <ul class="edit-task">
+                            <% for (let task of tasks) { %>
+                                <li>
+                                    <form action="/edit-task/<%= task._id %>" method="POST">
+                                        <div class="above">
+                                            <h2>
+                                                <%= task.Goal %>
+                                            </h2>
+                                            <button type="submit" class="edit-button"><i
+                                                    class="fa-solid fa-pen-to-square"></i></button>
+                                        </div>
+                                        <div class="under"><input type="text" name="Goal" value="<%= task.Goal %>">
+                                            <input type="text" name="Requirements" value="<%= task.Requirements %>">
+                                            <input type="date" name="Deadline" data-specialdate="<%= task.Deadline %>">
+                                        </div>
+                                    </form>
+                                </li>
+                                <% } %>
+                        </ul>
+                        <% } %>
+
+    </body>
+
+</html>
