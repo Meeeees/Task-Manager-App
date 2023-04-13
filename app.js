@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
 dburi = process.env.DBURI;
-
+port = process.env.PORT;
 
 
 const transporter = nodeMailer.createTransport({
@@ -23,7 +23,7 @@ const transporter = nodeMailer.createTransport({
 
 
 mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(3000, () => console.log("server online")))
+    .then(() => app.listen(port, () => console.log(`server online localhost:${port}`)))
     .catch(err => console.log(err))
 
 app.set('view engine', 'ejs');
