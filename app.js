@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
 const Task = require('./schema/task');
+const User = require('./schema/user');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const nodeMailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const secret = process.env.SECRET;
-dburi = process.env.DBURI;
+TaskdbURI = process.env.DBTASKURI;
+UserdbURI = process.env.DBUSERURI;
 port = process.env.PORT;
 
 
@@ -21,10 +23,19 @@ const transporter = nodeMailer.createTransport({
     }
 });
 
+// userDBConnection.then(() => { console.log('Connected to UserDB') }).catch((err) => { console.log(err) });
 
-mongoose.connect(dburi, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(port, () => console.log(`server online localhost:${port}`)))
-    .catch(err => console.log(err))
+mongoose.connect(TaskdbURI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+    const taskRoutes = require('./routes/taskroutes')();
+    app.use('/tasks', taskRoutes);
+    // check connection to DB
+    console.log(mongoose.connection.readyState)
+    app.listen(port, () => {
+        console.log(`Server is running on  localhost:${port}`);
+    });
+}).catch((err) => {
+    console.log(err);
+});
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -35,58 +46,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/create', (req, res) => {
-    res.render('create-task');
-});
 
-app.delete('/delete-task/:id', (req, res) => {
-    Task.findByIdAndDelete(req.params.id, (err, docs) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.redirect('/tasks');
-        }
-    })
-
-})
-
-app.get('/tasks', (req, res) => {
-    Task.find().sort({ 'Deadline': 1 })
-        .then(result => res.render('view-tasks', { tasks: result }))
-        .catch(err => console.log(err));
-});
-
-app.get('/edit', (req, res) => {
-    Task.find()
-        .then(result => res.render('edit-tasks', { tasks: result }))
-        .catch(err => console.log(err));
-});
 
 app.get('/signin', (req, res) => {
     res.render('signin');
-})
-
-
-app.post('/create-task', (req, res) => {
-    const task = new Task(req.body);
-    task.save()
-        .then(result => res.redirect('/tasks'))
-        .catch(err => console.log(err));
-});
-
-app.post('/edit-task/:id', (req, res) => {
-    id = req.params.id;
-    Task.findById(id)
-        .then(result => {
-            result.Goal = req.body.Goal;
-            result.Requirements = req.body.Requirements;
-            result.Deadline = req.body.Deadline;
-            result.save()
-                .then(result => res.redirect('/tasks'))
-                .catch(err => console.log(err));
-        })
-        .catch(err => console.log(err));
 })
 
 app.post('/sendVerificationEmail', (req, res) => {
@@ -114,6 +77,7 @@ app.get('/verify/:token', (req, res) => {
     jwt.verify(token, secret, (err, decoded) => {
         if (err) {
             console.log(err);
+            res.status(400).send('Invalid Token');
         }
         else {
             console.log(decoded);

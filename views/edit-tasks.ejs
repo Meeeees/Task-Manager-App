@@ -17,7 +17,7 @@
                         <ul class="edit-task">
                             <% for (let task of tasks) { %>
                                 <li>
-                                    <form action="/edit-task/<%= task._id %>" method="POST">
+                                    <form action="/tasks/edit-task/<%= task._id %>" method="POST">
                                         <div class="above">
                                             <h2>
                                                 <%= task.Goal %>

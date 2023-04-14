@@ -1,5 +1,5 @@
 function Delete() {
-    fetch('/delete-task/' + event.target.dataset.id, {
+    fetch('/tasks/delete-task/' + event.target.dataset.id, {
         method: 'DELETE'
     }).then(res => {
         window.location.reload();
@@ -44,7 +44,7 @@ function EditTask() {
     const data = element.dataset.data;
     console.log(data);
     element.parentElement.innerHTML += `
-    <form action="/edit-task/:${data._id}" method="POST">
+    <form action="/tasks/edit-task/:${data._id}" method="POST">
         <input type="text" name="Goal" value="${data.Goal}">
         <input type="text" name="Requirements" value="${data.Requirements}">
         <input type="date" name="Deadline" value="${data.Deadline}">
