@@ -18,6 +18,10 @@ const taskSchema = new Schema({
     },
     Completed: {
         type: Boolean,
+    },
+    UserID: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

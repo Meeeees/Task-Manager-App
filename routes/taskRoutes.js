@@ -1,11 +1,37 @@
 const express = require('express');
 const Taskrouter = express.Router();
 const Task = require('../schema/task.js');
+const secret = process.env.SECRET;
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
+Taskrouter.use(cookieParser());
 
 module.exports = () => {
+    let id;
+    Taskrouter.use((req, res, next) => {
+        const token = req.cookies.jwt;
+        if (token) {
+            jwt.verify(token, secret, (err, decoded) => {
+                if (err) {
+                    console.log(err);
+                    res.status(400).send('Invalid Token');
+                    return;
+                }
+                else {
+                    console.log(decoded);
+                    id = decoded.id;
+                    next();
+                }
+            })
+        } else {
+            res.redirect('/users/signup');
+        }
+    })
+
     Taskrouter.get('/', (req, res) => {
-        Task.find().sort({ 'Deadline': 1 })
-            .then(result => { res.render('view-tasks', { tasks: result }); console.log(result) })
+        Task.find({ UserID: id }).sort({ 'Deadline': 1 })
+            .then(result => { res.render('view-tasks', { tasks: result }); })
             .catch(err => console.log(err));
 
     });
@@ -15,13 +41,32 @@ module.exports = () => {
     });
 
     Taskrouter.get('/edit', (req, res) => {
-        Task.find()
+        Task.find({ UserID: id })
             .then(result => res.render('edit-tasks', { tasks: result }))
             .catch(err => console.log(err));
     });
 
     Taskrouter.post('/create-task', (req, res) => {
-        const task = new Task(req.body);
+        const token = req.cookies.jwt;
+        let id;
+        // verify jwt
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                console.log(err);
+                res.status(400).send('Invalid Token');
+                return;
+            }
+            else {
+                console.log(decoded);
+                id = decoded.id;
+            }
+        })
+        const task = new Task({
+            Goal: req.body.Goal,
+            Requirements: req.body.Requirements,
+            Deadline: req.body.Deadline,
+            UserID: id
+        });
         task.save()
             .then(result => res.redirect('/tasks'))
             .catch(err => console.log(err));

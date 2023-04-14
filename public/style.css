@@ -1,5 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
 
+:root {
+    --darkest-blue: #03045e;
+    --dark-blue: #023e8a;
+    --blue: #0077b6;
+    --light-blue: #0096c7;
+    --lighter-blue: #00b4d8;
+    --lightest-blue: #48cae4;
+    --blue-white: 90e0ef;
+    --blueish-white: #ade8f4;
+    --white: #caf0f8;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -196,4 +208,152 @@ body {
     background: none;
     border-right: none;
     border: none;
+}
+
+.signupform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 400px;
+    background-color: #1E3040;
+    padding: 30px 50px;
+    border-radius: 8px;
+}
+
+.signupform label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.signupform input[type="email"],
+.signupform input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #3A3F4B;
+    background-color: #fff;
+}
+
+.signupform button[type="submit"] {
+    background-color: #F4F8FB;
+    color: #1E3040;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 15px;
+}
+
+.signupform button[type="submit"]:hover {
+    background-color: #3A3F4B;
+    color: #fff;
+}
+
+.signupform a {
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.signupform a:hover {
+    color: #F4F8FB;
+}
+
+.signinform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 400px;
+    background-color: #F0F8FF;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.signinform label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1E3040;
+}
+
+.signinform input[type="email"],
+.signinform input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #1E3040;
+    background-color: #fff;
+}
+
+.signinform button[type="submit"] {
+    background-color: #1E3040;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out;
+    margin-bottom: 15px;
+}
+
+.signinform button[type="submit"]:hover {
+    background-color: #fff;
+    color: #1E3040;
+}
+
+.signinform a {
+    font-size: 14px;
+    color: #1E3040;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.signinform a:hover {
+    color: #F0F8FF;
+}
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
 }

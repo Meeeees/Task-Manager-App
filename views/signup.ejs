@@ -5,20 +5,11 @@
     <body>
         <%- include('partials/signnav.ejs') %>
 
-            <!-- <form class="signinform" action="/users/Verifyuser" method="post">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password">
-                <button type="submit">Sign in</button>
-                <a href="/users/signup">Don't have an account? Sign up</a>
-            </form> -->
-
             <section class="vh-100">
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-center align-items-center h-100">
                         <div class="col-md-9 col-lg-6 col-xl-5">
-                            <img src="/images/login.svg" alt="login svg">
+                            <img src="/images/register.svg" alt="login svg">
                         </div>
                         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                             <form>
@@ -39,9 +30,9 @@
 
                                 <div class="text-center text-lg-start mt-4 pt-2">
                                     <button type="button" class="btn btn-primary btn-lg"
-                                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Sign in</button>
-                                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a
-                                            href="/users/signup" class="link-danger">Sign up</a></p>
+                                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Sign up</button>
+                                    <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a
+                                            href="/users/signin" class="link-danger">Sign in</a></p>
                                 </div>
 
                             </form>
@@ -50,6 +41,7 @@
                 </div>
                 </div>
             </section>
+
 
     </body>
 
