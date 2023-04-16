@@ -2,10 +2,10 @@
 <html lang="en">
 <%- include('partials/head.ejs') %>
 
-    <body>
+    <body class="vh-100">
         <%- include('partials/signnav.ejs') %>
 
-            <section class="vh-100">
+            <section class="max-vh-100">
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-center text-center align-items-center h-100">
                         <div class="col-md-9 col-lg-6 col-xl-5">
@@ -22,6 +22,7 @@
                                 <div class="form-outline mb-4">
                                     <input type="email" id="email" class="form-control form-control-lg"
                                         placeholder="Enter a valid email address" name="Email" />
+                                    <p class="info"></p>
                                     <label class="form-label" for="email">Email address</label>
                                 </div>
 
@@ -34,7 +35,7 @@
 
 
                                 <div class="text-center text-lg-start mt-4 pt-2">
-                                    <button type="submit" class="btn btn-primary btn-lg"
+                                    <button type="submit" class="signupbutton btn btn-primary btn-lg"
                                         style="padding-left: 2.5rem; padding-right: 2.5rem;">Sign up</button>
                                     <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a
                                             href="/users/signin" class="link-danger">Sign in</a></p>
@@ -47,7 +48,25 @@
                 </div>
             </section>
 
-
+            <script>
+                const emailinput = document.querySelector('#email');
+                const info = document.querySelector('.info');
+                emailinput.addEventListener('blur', (e) => {
+                    const email = e.target.value;
+                    fetch('/users/checkemailexists/' + email)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data) {
+                                info.textContent = 'Email already exists';
+                                info.style.color = 'red';
+                                document.querySelector('.signupbutton').disabled = true;
+                            } else {
+                                info.textContent = '';
+                                document.querySelector('.signupbutton').disabled = false;
+                            }
+                        })
+                })
+            </script>
     </body>
 
 </html>

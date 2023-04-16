@@ -361,3 +361,22 @@ body {
 .logo {
     max-width: 80px;
 }
+
+.containerhome {
+    margin-top: 50px;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.containerhome>h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.containerhome>p {
+    font-size: 1.5em;
+    color: #555555;
+    margin-bottom: 30px;
+}

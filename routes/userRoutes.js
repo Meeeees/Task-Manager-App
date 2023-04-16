@@ -24,8 +24,6 @@ for (let interfaceName in interfaces) {
 }
 const saltrounds = 10;
 
-console.log(ipadres);
-
 
 const transporter = nodeMailer.createTransport({
     host: 'smtp.ziggo.nl',
@@ -55,6 +53,10 @@ module.exports = (loggedIn) => {
         res.render('incorrect-login', { loggedIn: loggedIn });
     })
 
+    Userrouter.get('/Emailsent', (req, res) => {
+        res.render('Emailsent', { loggedIn: loggedIn });
+    })
+
     Userrouter.post("/sendresetpass", (req, res) => {
         const Email = req.body.email;
         const password = req.body.password;
@@ -80,21 +82,40 @@ module.exports = (loggedIn) => {
 
     Userrouter.get('/resetpass/:token', (req, res) => {
         const token = req.params.token;
-        jwt.verify(token, secret, (err, decoded) => {
+        jwt.verify(token, secret, async (err, decoded) => {
             if (err) {
                 console.log(err);
                 res.status(400).send('Invalid Token');
             }
             else {
-                console.log(decoded);
+                console.log("reset: ", decoded);
                 const Email = decoded.email;
                 const Password = decoded.password;
+                let user = await User.findOne({ Email: Email })
+                user.Password = bcrypt.hashSync(Password, saltrounds);
+                user.ActualPassword = Password;
+                user.save().then
+                    (result => {
+                        console.log("resetresult: ", result);
+                    })
+                res.redirect('/users/signin');
 
             }
         })
     })
 
-
+    Userrouter.get('/checkemailexists/:email', (req, res) => {
+        const Email = req.params.email;
+        User.find({ Email: Email })
+            .then(result => {
+                let exists = false;
+                if (result.length > 0) {
+                    exists = true;
+                }
+                exists = JSON.stringify(exists);
+                res.send(exists);
+            })
+    })
 
     Userrouter.post('/sendVerificationEmail', (req, res) => {
         const Email = req.body.Email;
@@ -103,7 +124,7 @@ module.exports = (loggedIn) => {
         User.find({ Email: Email })
             .then(result => {
                 if (result.length > 0) {
-                    res.send('<p>Email already exists</p>' + Email);
+                    res.send("<p>Email already exists</p><small>PS: Don't delete properties</small><br>");
                     return;
                 } else {
                     let Password = req.body.Password;
