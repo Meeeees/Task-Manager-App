@@ -19,7 +19,7 @@ module.exports = () => {
                     return;
                 }
                 else {
-                    console.log(decoded);
+                    console.log("tasks: ", decoded);
                     id = decoded.id;
                     next();
                 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head.ejs') %>
+
+    <body class="text-center row">
+        <%- include('partials/signnav.ejs') %>
+
+            <img src="/images/incorrectlogin.svg" alt="incorrect login svg" class="col-sm" alt width="400" height="400">
+
+            <form class="w-50 mx-auto col-sm my-auto" method="post" action="/users/sendresetpass">
+                <h1 class="mb-4">Oops, incorrect login</h1>
+                <h3>Forgot Password?</h3>
+                <div class="form-outline mb-4 p-4">
+                    <input type="email" id="email" class="form-control form-control-lg"
+                        placeholder="Enter a valid email address" name="email" />
+                    <input type="password" id="password" class="form-control form-control-lg"
+                        placeholder="Enter your new Password" name="password" />
+                    <button type="submit" class="btn btn-primary mt-2 btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Send</button>
+                </div>
+            </form>
+
+    </body>

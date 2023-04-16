@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <%- include('partials/head.ejs') %>
 
     <body>
-        <%- include('partials/signnav.ejs') %>
-            <h1>Home</h1>
+        <% if (loggedIn) { %>
+            <%- include('partials/nav.ejs') %>
+                <% } else { %>
+                    <%- include('partials/signnav.ejs') %>
+                        <% } %>
+
+                            <h1>Home</h1>
     </body>
 
 </html>

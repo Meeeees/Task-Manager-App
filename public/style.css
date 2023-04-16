@@ -33,12 +33,12 @@ body {
 
 .header>.logo {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 0;
+    transform: translate(0, -50%);
     font-size: 32px;
     font-weight: 100;
     padding: 26px;
-    border-right: 1px solid black;
 }
 
 .link {
@@ -356,4 +356,8 @@ body {
     .h-custom {
         height: 100%;
     }
+}
+
+.logo {
+    max-width: 80px;
 }

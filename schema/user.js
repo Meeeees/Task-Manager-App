@@ -5,6 +5,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    ActualPassword: {
+        type: String,
+        required: true
+    },
     Email: {
         type: String,
         required: true
