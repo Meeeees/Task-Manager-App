@@ -74,7 +74,7 @@ module.exports = (loggedIn) => {
             }
             else {
                 console.log('Email sent: ' + info.response);
-                res.send('<p>Verification email sent</p>')
+                res.redirect("/users/Emailsent");
             }
         })
 
@@ -147,7 +147,7 @@ module.exports = (loggedIn) => {
                         }
                         else {
                             console.log('Email sent: ' + info.response);
-                            res.send('<p>Verification email sent</p>')
+                            res.redirect("/users/Emailsent");
                         }
                     })
                 }

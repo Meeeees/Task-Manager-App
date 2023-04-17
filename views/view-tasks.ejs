@@ -13,28 +13,84 @@
             <p>No tasks to show</p>
 
             <% } %>
+
+
+
+
                 <% if (tasks.length> 0) { %>
                     <input type="text" id="search" onkeyup="search()" placeholder="Search for tasks..">
                     </div>
                     <ul class="view-tasks">
                         <% for (let task of tasks) { %>
-                            <li>
-                                <h3>
-                                    <%= task.Goal %>
-                                </h3>
-                                <p class="reqs">
-                                    <%= task.Requirements %>
-                                </p>
-                                <p data-date="<%= task.Deadline %>">
-                                    <strong></strong>
-                                </p>
-                                <button class="removebutton" data-id="<%= task._id %>" onclick="Delete()"><i
-                                        class="fa-solid fa-trash"></i>
-                                </button>
+
+
+                            <!-- <li>
+                                    <h3>
+                                        <%= task.Goal %>
+                                    </h3>
+                                    <p class="reqs">
+                                        <%= task.Requirements %>
+                                    </p>
+                                    <p data-date="<%= task.Deadline %>">
+                                        <strong></strong>
+                                    </p>
+                                    <button class="removebutton" data-id="<%= task._id %>" onclick="Delete()"><i
+                                            class="fa-solid fa-trash"></i>
+                                    </button>
+                                </li> -->
+
+                            <li class="kanban-card">
+                                <div class="header">
+                                    <h3 class="title">
+                                        <%= task.Goal %>
+                                    </h3>
+                                    <span class="icon deletebutton" style="color: red;" data-id="<%= task._id %>"><i
+                                            data-id="<%= task._id %>" class="fa-solid fa-trash"></i></span>
+                                    <!-- add button to delete -->
+                                </div>
+                                <div class="section">
+                                    <h4 class="section-title">Deadline</h4>
+                                    <p class="deadline" data-date="<%= task.Deadline %>">
+                                        <strong></strong>
+                                    </p>
+                                </div>
+                                <div class="section">
+                                    <h4 class="section-title">
+                                        Task Requirements
+                                    </h4>
+                                    <ul class="bullet-points">
+                                        <li>
+                                            <%= task.Requirements[0] %>
+                                        </li>
+                                        <li>
+                                            <%= task.Requirements[1] %>
+                                        </li>
+                                        <li>
+                                            <%= task.Requirements[2] %>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
+
+
                             <% } %>
                     </ul>
                     <% } %>
+
+                        <script>
+                            // give all the cards a random color from the array
+                            const cards = document.querySelectorAll(".kanban-card");
+                            const cardColors = [{ bgColor: "#F9AFAF", textColor: "#333" }, {
+                                bgColor: "#B0E0E6", textColor: "#333"
+                            }, { bgColor: "#F0E68C", textColor: "#333" }, { bgColor: "#C5E5A4", textColor: "#333" },];
+
+                            cards.forEach((card) => {
+                                const randomColor = cardColors[Math.floor(Math.random() * cardColors.length)];
+                                card.style.backgroundColor = randomColor.bgColor;
+                                card.style.color = randomColor.textColor;
+                            });
+
+                        </script>
     </body>
 
 </html>

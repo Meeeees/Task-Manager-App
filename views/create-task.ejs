@@ -4,9 +4,6 @@
 <%- include('partials/head.ejs') %>
 
     <style>
-        body {
-            overflow-y: hidden;
-        }
     </style>
 
     <body>
@@ -15,8 +12,12 @@
             <form class="create-task" action="/tasks/create-task" method="post">
                 <label for="Goal">Goal</label>
                 <input type="text" id="Goal" required name="Goal" placeholder="Goal">
-                <label for="Requirements">Requirements</label>
-                <input type="text" id="Requirements" required name="Requirements" placeholder="Requirements">
+                <label for="Requirements">Requirements (3)</label>
+
+                <input type="text" id="Requirements" required name="Requirements[]" placeholder="Requirement">
+                <input type="text" id="Requirements" required name="Requirements[]" placeholder="Requirement">
+                <input type="text" id="Requirements" required name="Requirements[]" placeholder="Requirement">
+
                 <label for="Deadline">Deadline</label>
                 <input type="date" id="Deadline" required name="Deadline" placeholder="Deadline">
 

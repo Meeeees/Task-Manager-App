@@ -1,10 +1,15 @@
-function Delete() {
+function Delete(event) {
+    console.log(event.target)
     fetch('/tasks/delete-task/' + event.target.dataset.id, {
         method: 'DELETE'
     }).then(res => {
         window.location.reload();
     })
 }
+
+document.querySelectorAll('.deletebutton').forEach(element => {
+    element.addEventListener('click', Delete)
+})
 
 function calctimeuntil(element) {
     // Set the target date
@@ -26,11 +31,11 @@ function calctimeuntil(element) {
         element.querySelector('strong').style.color = 'red';
     }
     if (timeDiff < 0) {
-        element.querySelector('strong').innerHTML = `Deadline passed ${Math.abs(days)} days, ${Math.abs(hours)} hours, ${Math.abs(minutes)} minutes, ${Math.abs(seconds)} seconds ago.`
+        element.querySelector('strong').innerHTML = `${Math.abs(days)} days, ${Math.abs(hours)} hours, ${Math.abs(minutes)} minutes, ${Math.abs(seconds)} seconds ago.`
         return;
     }
 
-    element.querySelector('strong').innerHTML = `The deadline is in ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds.`
+    element.querySelector('strong').innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds.`
 }
 
 document.querySelectorAll('[data-date]').forEach(element => {
@@ -78,7 +83,7 @@ function search() {
     const search = document.getElementById('search').value;
     const listitems = document.querySelectorAll('.view-tasks>li');
     listitems.forEach(element => {
-        if (element.querySelector('h3').innerHTML.toLowerCase().includes(search.toLowerCase()) || element.querySelector('.reqs').innerHTML.toLowerCase().includes(search.toLowerCase())) {
+        if (element.querySelector('h3').innerHTML.toLowerCase().includes(search.toLowerCase())) {
             element.style.display = 'flex';
         } else {
             element.style.display = 'none';

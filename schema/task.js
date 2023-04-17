@@ -6,18 +6,27 @@ const taskSchema = new Schema({
         required: true
     },
     Requirements: {
-        type: String,
+        type: Array,
         required: true
     },
     Deadline: {
         type: Date,
         required: true
     },
-    Started: {
+    ToDo: {
         type: Boolean,
+        default: true,
+        required: true
     },
-    Completed: {
+    Doing: {
         type: Boolean,
+        default: false,
+        required: true
+    },
+    Finished: {
+        type: Boolean,
+        default: false,
+        required: true
     },
     UserID: {
         type: String,

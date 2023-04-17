@@ -26,7 +26,12 @@
                                                     class="fa-solid fa-pen-to-square"></i></button>
                                         </div>
                                         <div class="under"><input type="text" name="Goal" value="<%= task.Goal %>">
-                                            <input type="text" name="Requirements" value="<%= task.Requirements %>">
+                                            <input type="text" name="Requirements[]"
+                                                value="<%= task.Requirements[0] %>">
+                                            <input type="text" name="Requirements[]"
+                                                value="<%= task.Requirements[1] %>">
+                                            <input type="text" name="Requirements[]"
+                                                value="<%= task.Requirements[2] %>">
                                             <input type="date" name="Deadline" data-specialdate="<%= task.Deadline %>">
                                         </div>
                                     </form>
