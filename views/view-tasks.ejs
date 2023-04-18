@@ -62,7 +62,7 @@
                                             </div>
                                             <div class="section">
                                                 <button class="ToDo"><i class="fa-solid fa-list-check"></i></button>
-                                                <button class="InProgress"><i class="fa-solid fa-gear"></i></button>
+                                                <button class="Doing"><i class="fa-solid fa-gear"></i></button>
                                                 <button class="Finished"><i class="fa-solid fa-check"></i></button>
                                             </div>
                                         </li>
@@ -70,9 +70,9 @@
                                             <% }); %>
                             </ul>
                         </div>
-                        <div class="column inprogress">
+                        <div class="column Doing">
                             <li>In Progress</li>
-                            <ul id="inprogressList">
+                            <ul id="DoingList">
                                 <% tasks.forEach(task=> { %>
                                     <% if (task.Doing) { %>
                                         <li class="kanban-card" data-id="<%= task._id %>">
@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="section">
                                                 <button class="ToDo"><i class="fa-solid fa-list-check"></i></button>
-                                                <button class="InProgress"><i class="fa-solid fa-gear"></i></button>
+                                                <button class="Doing"><i class="fa-solid fa-gear"></i></button>
                                                 <button class="Finished"><i class="fa-solid fa-check"></i></button>
                                             </div>
                                         </li>
@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="section">
                                                 <button class="ToDo"><i class="fa-solid fa-list-check"></i></button>
-                                                <button class="InProgress"><i class="fa-solid fa-gear"></i></button>
+                                                <button class="Doing"><i class="fa-solid fa-gear"></i></button>
                                                 <button class="Finished"><i class="fa-solid fa-check"></i></button>
                                             </div>
                                         </li>

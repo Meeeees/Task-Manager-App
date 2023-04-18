@@ -132,7 +132,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     justify-items: center;
-    grid-area: "ToDo InProgress Done";
 }
 
 
@@ -468,7 +467,7 @@ body {
     background-color: #B7C9E3;
 }
 
-.section .InProgress {
+.section .Doing {
     background-color: #FCD462;
 }
 

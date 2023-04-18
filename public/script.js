@@ -81,7 +81,7 @@ document.querySelectorAll('[data-specialdate]').forEach(element => {
 
 function search() {
     const search = document.getElementById('search').value;
-    const listitems = document.querySelectorAll('.view-tasks>.kanban-card');
+    const listitems = document.querySelectorAll('.view-tasks .kanban-card');
     listitems.forEach(element => {
         if (element.querySelector('h3').innerHTML.toLowerCase().includes(search.toLowerCase())) {
             element.style.display = 'flex';
@@ -103,19 +103,35 @@ cards.forEach((card) => {
 });
 
 document.querySelectorAll(".kanban-card button.ToDo").forEach(element => {
-    element.addEventListener('click', () => {
-        console.log("todo")
-    })
+    element.addEventListener('click', UpdateState)
 })
 
-document.querySelectorAll(".kanban-card button.InProgress").forEach(element => {
-    element.addEventListener('click', () => {
-        console.log("inprogress")
-    })
-})
+document.querySelectorAll(".kanban-card button.Doing").forEach(element => {
+    element.addEventListener('click', UpdateState)
+}, true)
 
 document.querySelectorAll(".kanban-card button.Finished").forEach(element => {
-    element.addEventListener('click', () => {
-        console.log("Finished")
+    element.addEventListener('click', UpdateState)
+}, true)
+
+
+function UpdateState() {
+    let id = event.target.parentElement.parentElement.dataset.id;
+    let state = event.target.classList;
+    if (state.contains("fa-solid")) {
+        id = event.target.parentElement.parentElement.parentElement.dataset.id;
+        state = event.target.parentElement.classList;
+    }
+    console.log(id, state[0])
+    fetch('/tasks/state/' + id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            state: state[0]
+        })
+    }).then(res => {
+        window.location.reload();
     })
-})
+}
