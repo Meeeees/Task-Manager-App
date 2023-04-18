@@ -46,6 +46,34 @@ module.exports = () => {
             .catch(err => console.log(err));
     });
 
+    Taskrouter.post('/state/:id', (req, res) => {
+        id = req.params.id;
+        ToState = req.body.state;
+        Task.findById(id)
+            .then(result => {
+                if (ToState == 'ToDo') {
+                    result.ToDo = true;
+                    result.Doing = false;
+                    result.Finished = false;
+                }
+                else if (ToState == 'Doing') {
+                    result.ToDo = false;
+                    result.Doing = true;
+                    result.Finished = false;
+                }
+                else if (ToState == 'Finished') {
+                    result.ToDo = false;
+                    result.Doing = false;
+                    result.Finished = true;
+                }
+                result.save()
+                    .then(result => res.redirect('/tasks'))
+                    .catch(err => console.log(err));
+            })
+    })
+
+
+
     Taskrouter.post('/create-task', (req, res) => {
         const token = req.cookies.jwt;
         let id;
@@ -99,4 +127,4 @@ module.exports = () => {
 
 
     return Taskrouter;
-};
+}

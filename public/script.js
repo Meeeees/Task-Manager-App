@@ -81,7 +81,7 @@ document.querySelectorAll('[data-specialdate]').forEach(element => {
 
 function search() {
     const search = document.getElementById('search').value;
-    const listitems = document.querySelectorAll('.view-tasks>li');
+    const listitems = document.querySelectorAll('.view-tasks>.kanban-card');
     listitems.forEach(element => {
         if (element.querySelector('h3').innerHTML.toLowerCase().includes(search.toLowerCase())) {
             element.style.display = 'flex';
@@ -90,3 +90,32 @@ function search() {
         }
     })
 }
+
+const cards = document.querySelectorAll(".kanban-card");
+const cardColors = [{ bgColor: "#F9AFAF", textColor: "#333" }, {
+    bgColor: "#B0E0E6", textColor: "#333"
+}, { bgColor: "#F0E68C", textColor: "#333" }, { bgColor: "#C5E5A4", textColor: "#333" },];
+
+cards.forEach((card) => {
+    const randomColor = cardColors[Math.floor(Math.random() * cardColors.length)];
+    card.style.backgroundColor = randomColor.bgColor;
+    card.style.color = randomColor.textColor;
+});
+
+document.querySelectorAll(".kanban-card button.ToDo").forEach(element => {
+    element.addEventListener('click', () => {
+        console.log("todo")
+    })
+})
+
+document.querySelectorAll(".kanban-card button.InProgress").forEach(element => {
+    element.addEventListener('click', () => {
+        console.log("inprogress")
+    })
+})
+
+document.querySelectorAll(".kanban-card button.Finished").forEach(element => {
+    element.addEventListener('click', () => {
+        console.log("Finished")
+    })
+})
